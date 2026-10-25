@@ -1,0 +1,18 @@
+{"line":"GET /health 200 96 - 16.394 ms","time":"2026-10-19T06:35:33.174Z","level":"info","event":"http.request"}
+{"userId":"6ad5ba361391ed7fd1eca00c","time":"2026-10-19T06:35:35.180Z","level":"info","event":"auth.signup_success"}
+{"line":"POST /api/v1/user/signup 201 161 - 1926.507 ms","time":"2026-10-19T06:35:35.191Z","level":"info","event":"http.request"}
+{"ip":"127.0.0.1","fields":["username"],"time":"2026-10-19T06:35:37.291Z","level":"warn","event":"auth.signup_duplicate"}
+{"line":"POST /api/v1/user/signup 409 164 - 2164.520 ms","time":"2026-10-19T06:35:37.470Z","level":"info","event":"http.request"}
+{"ip":"127.0.0.1","identifier":"username","time":"2026-10-19T06:35:39.758Z","level":"warn","event":"auth.login_failed"}
+{"line":"POST /api/v1/user/login 401 72 - 2113.756 ms","time":"2026-10-19T06:35:39.768Z","level":"info","event":"http.request"}
+{"userId":"6ad5ba361391ed7fd1eca00c","time":"2026-10-19T06:35:40.850Z","level":"info","event":"auth.login_success"}
+{"line":"POST /api/v1/user/login 200 413 - 1058.136 ms","time":"2026-10-19T06:35:40.873Z","level":"info","event":"http.request"}
+{"ip":"127.0.0.1","method":"GET","path":"/api/v1/emp/employees","time":"2026-10-19T06:35:40.893Z","level":"warn","event":"auth.missing_token"}
+{"line":"GET /api/v1/emp/employees 401 68 - 2.873 ms","time":"2026-10-19T06:35:40.896Z","level":"info","event":"http.request"}
+{"line":"GET /api/v1/emp/employees 200 26 - 38.003 ms","time":"2026-10-19T06:35:40.954Z","level":"info","event":"http.request"}
+{"ip":"127.0.0.1","path":"/api/v1/emp/employees","fields":["last_name","email","position","salary","date_of_joining","department"],"time":"2026-10-19T06:35:40.997Z","level":"warn","event":"validation.employee_failed"}
+{"line":"POST /api/v1/emp/employees 400 419 - 15.877 ms","time":"2026-10-19T06:35:40.999Z","level":"info","event":"http.request"}
+{"ip":"127.0.0.1","path":"/api/v1/emp/employees/not-an-id","time":"2026-10-19T06:35:41.015Z","level":"warn","event":"request.invalid_employee_id"}
+{"line":"GET /api/v1/emp/employees/not-an-id 400 63 - 7.909 ms","time":"2026-10-19T06:35:41.019Z","level":"info","event":"http.request"}
+{"ip":"127.0.0.1","method":"GET","path":"/api/v1/does-not-exist","time":"2026-10-19T06:35:41.031Z","level":"warn","event":"request.route_not_found"}
+{"line":"GET /api/v1/does-not-exist 404 64 - 5.273 ms","time":"2026-10-19T06:35:41.036Z","level":"info","event":"http.request"}
