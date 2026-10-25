@@ -1,0 +1,7 @@
+node_modules/
+.env
+*.log
+!docs/sample-app.log
+logs/
+coverage/
+.vercel/
