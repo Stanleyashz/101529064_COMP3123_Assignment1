@@ -7,7 +7,7 @@ A secure REST API built with Node.js, Express, and MongoDB. Users register, log 
 | Student name | Stanley Okafor |
 | Student number | 101529064 |
 | Repository | [101529064_COMP3123_Assignment1](https://github.com/Stanleyashz/101529064_COMP3123_Assignment1) |
-| Deployed API | https://101529064-comp-3123-assignment1-oj1.vercel.app/ |
+| Deployed API | https://101529064-comp-3123-assignment1.vercel.app/ |
 | Database | `comp3123_assignment1` |
 
 ## Purpose
