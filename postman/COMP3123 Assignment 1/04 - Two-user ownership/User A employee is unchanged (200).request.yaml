@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/emp/employees/{{eidA}}"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 200', () => pm.response.to.have.status(200));
+      pm.test('Position was not changed by user B', () => pm.expect(pm.response.json().employee.position).to.eql('Senior Engineer'));
+    language: text/javascript
+order: 6000

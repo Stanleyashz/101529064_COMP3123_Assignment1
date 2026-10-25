@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/user/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"username":"bob{{runId}}","password":"StrongPass123"}'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 200', () => pm.response.to.have.status(200));
+      pm.collectionVariables.set('secondToken', pm.response.json().token);
+    language: text/javascript
+order: 12000

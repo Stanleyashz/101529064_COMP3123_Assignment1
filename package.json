@@ -2,6 +2,7 @@
   "name": "comp3123-assignment1-api",
   "version": "1.0.0",
   "private": true,
+  "author": "Stanley Okafor",
   "description": "COMP 3123 Assignment 1 - Express/MongoDB employee API with JWT auth, ownership checks, validation, logging, and rate limiting",
   "main": "api/index.js",
   "engines": {

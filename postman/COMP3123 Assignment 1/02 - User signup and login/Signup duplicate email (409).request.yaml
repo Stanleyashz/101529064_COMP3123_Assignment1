@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/user/signup"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"username":"alice2{{runId}}","email":"alice{{runId}}@example.com","password":"StrongPass123"}'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 409', () => pm.response.to.have.status(409));
+      pm.test('Details mention email', () => pm.expect(JSON.stringify(pm.response.json().error.details)).to.include('email'));
+    language: text/javascript
+order: 3000

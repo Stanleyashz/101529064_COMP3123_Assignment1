@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/user/signup"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"username":"bademail{{runId}}","email":"not-an-email","password":"StrongPass123"}'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 400', () => pm.response.to.have.status(400));
+      pm.test('Validation code', () => pm.expect(pm.response.json().error.code).to.eql('VALIDATION_ERROR'));
+      pm.test('Details mention email', () => pm.expect(JSON.stringify(pm.response.json().error.details)).to.include('email'));
+    language: text/javascript
+order: 4000

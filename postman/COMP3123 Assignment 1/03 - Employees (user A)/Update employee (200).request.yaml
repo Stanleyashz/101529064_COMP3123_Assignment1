@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/emp/employees/{{eidA}}"
+method: PUT
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+body:
+  type: text
+  content: '{"position":"Senior Engineer","salary":95000}'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 200', () => pm.response.to.have.status(200));
+      pm.test('Position updated', () => pm.expect(pm.response.json().employee.position).to.eql('Senior Engineer'));
+      pm.test('Salary updated', () => pm.expect(pm.response.json().employee.salary).to.eql(95000));
+    language: text/javascript
+order: 4000

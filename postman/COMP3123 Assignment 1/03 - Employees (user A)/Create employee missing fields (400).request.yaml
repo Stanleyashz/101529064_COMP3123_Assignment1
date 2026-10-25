@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/emp/employees"
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+body:
+  type: text
+  content: '{"first_name":"Sam"}'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 400', () => pm.response.to.have.status(400));
+      pm.test('All seven fields are reported', () => pm.expect(pm.response.json().error.details).to.have.lengthOf(7));
+    language: text/javascript
+order: 5000

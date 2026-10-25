@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/emp/employees"
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+body:
+  type: text
+  content: '{"first_name":"Sam","last_name":"Lee","email":"sam2{{runId}}@example.com","position":"Engineer","salary":"not-a-number","date_of_joining":"2025-01-15","department":"Engineering"}'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 400', () => pm.response.to.have.status(400));
+      pm.test('Details mention salary', () => pm.expect(JSON.stringify(pm.response.json().error.details)).to.include('salary'));
+    language: text/javascript
+order: 7000

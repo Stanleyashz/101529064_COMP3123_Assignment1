@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/user/signup"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: "{}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 400', () => pm.response.to.have.status(400));
+      pm.test('All three fields are reported', () => {
+        const fields = pm.response.json().error.details.map(item => item.field);
+        pm.expect(fields).to.include.members(['username', 'email', 'password']);
+      });
+    language: text/javascript
+order: 6000

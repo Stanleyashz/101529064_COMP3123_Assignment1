@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/emp/employees"
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{secondToken}}
+body:
+  type: text
+  content: '{"first_name":"Rita","last_name":"Ng","email":"rita{{runId}}@example.com","position":"Analyst","salary":72000,"date_of_joining":"2024-06-01","department":"Finance"}'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 201', () => pm.response.to.have.status(201));
+      pm.collectionVariables.set('eidB', pm.response.json().employee._id);
+    language: text/javascript
+order: 1000

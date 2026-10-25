@@ -1,0 +1,18 @@
+$kind: collection
+description: |-
+  Employee API collection.
+
+  How to use:
+  1. Set the `baseUrl` collection variable (local: http://localhost:3000, or your Vercel URL).
+  2. Run `00 - Start test run` first. It creates a unique run id so usernames and emails do not collide on a second run.
+  3. Run the folders in order. Login requests save `token` and `secondToken`; employee requests save `eidA` and `eidB`.
+  4. The auth endpoints allow 20 requests per 15 minutes per IP. Wait for the window to reset before another full run.
+  5. The rate-limit folder is meant to be run separately with about 25 iterations (see its description).
+variables:
+  baseUrl: http://localhost:3000
+  runId: ""
+  token: ""
+  secondToken: ""
+  tamperedToken: ""
+  eidA: ""
+  eidB: ""

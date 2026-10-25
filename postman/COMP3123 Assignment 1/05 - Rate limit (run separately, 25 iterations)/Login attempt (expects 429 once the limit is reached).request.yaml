@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/user/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"username":"nobody{{runId}}","password":"WrongPass123"}'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Auth attempt answered', () => pm.expect([401, 429]).to.include(pm.response.code));
+      if (pm.response.code === 429) {
+        pm.test('Rate limit code is RATE_LIMITED', () => pm.expect(pm.response.json().error.code).to.eql('RATE_LIMITED'));
+        pm.test('Retry-After header is present', () => pm.expect(pm.response.headers.get('Retry-After')).to.be.a('string'));
+        pm.test('RateLimit header is present', () => pm.expect(pm.response.headers.get('RateLimit')).to.be.a('string'));
+      }
+    language: text/javascript
+order: 1000

@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/emp/employees/{{eidA}}"
+method: GET
+headers:
+  Authorization: Bearer {{secondToken}}
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 403', () => pm.response.to.have.status(403));
+      pm.test('Forbidden code', () => pm.expect(pm.response.json().error.code).to.eql('FORBIDDEN'));
+    language: text/javascript
+order: 3000

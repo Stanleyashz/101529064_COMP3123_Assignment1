@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/emp/employees"
+method: GET
+headers:
+  Authorization: Bearer invalid-token
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 401', () => pm.response.to.have.status(401));
+      pm.test('Invalid token code', () => pm.expect(pm.response.json().error.code).to.eql('INVALID_TOKEN'));
+    language: text/javascript
+order: 10000

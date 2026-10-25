@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/user/signup"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"username":"alice{{runId}}","email":"alice{{runId}}@example.com","password":"StrongPass123"}'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 201', () => pm.response.to.have.status(201));
+      const body = pm.response.json();
+      pm.test('Username echoed back', () => pm.expect(body.user.username).to.eql('alice' + pm.collectionVariables.get('runId')));
+      pm.test('Password is never returned', () => pm.expect(body.user.password).to.be.undefined);
+    language: text/javascript
+order: 1000

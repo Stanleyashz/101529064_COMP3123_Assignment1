@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/health"
+method: GET
+scripts:
+  - type: beforeRequest
+    code: |-
+      const id = Date.now().toString(36);
+      pm.collectionVariables.set('runId', id);
+      console.log('Test run id: ' + id);
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      pm.test('Run id initialised', () => pm.expect(pm.collectionVariables.get('runId')).to.be.a('string').and.not.empty);
+      pm.test('Health check returns 200', () => pm.response.to.have.status(200));
+    language: text/javascript
+order: 1000

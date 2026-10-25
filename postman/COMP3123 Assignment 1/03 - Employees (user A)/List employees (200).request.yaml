@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/emp/employees"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 200', () => pm.response.to.have.status(200));
+      const body = pm.response.json();
+      pm.test('Exactly one employee for user A', () => pm.expect(body.employees).to.have.lengthOf(1));
+      pm.test('Count matches array length', () => pm.expect(body.count).to.eql(body.employees.length));
+    language: text/javascript
+order: 2000

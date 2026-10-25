@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/emp/employees"
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+body:
+  type: text
+  content: '{"first_name":"Sam","last_name":"Lee","email":"sam{{runId}}@example.com","position":"Engineer","salary":85000,"date_of_joining":"2025-01-15","department":"Engineering"}'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 201', () => pm.response.to.have.status(201));
+      const employee = pm.response.json().employee;
+      pm.test('Owner field is set', () => pm.expect(employee.user).to.be.a('string').and.not.empty);
+      pm.collectionVariables.set('eidA', employee._id);
+    language: text/javascript
+order: 1000

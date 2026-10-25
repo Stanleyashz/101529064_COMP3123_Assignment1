@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/emp/employees"
+method: GET
+headers:
+  Authorization: Bearer {{secondToken}}
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 200', () => pm.response.to.have.status(200));
+      const employees = pm.response.json().employees;
+      pm.test('Only one employee for user B', () => pm.expect(employees).to.have.lengthOf(1));
+      pm.test('User A employee is not visible', () => pm.expect(employees.some(item => item._id === pm.collectionVariables.get('eidA'))).to.be.false);
+    language: text/javascript
+order: 2000

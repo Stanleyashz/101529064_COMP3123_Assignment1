@@ -1,0 +1,3 @@
+$kind: collection
+description: Select this folder in the Collection Runner and run about 25 iterations of the login request. The first 20 attempts in the 15 minute window return 401; later attempts return 429 RATE_LIMITED with a Retry-After header. Capture that response for the screenshot document. Run this folder after the other folders, because it uses up the auth allowance.
+order: 6000

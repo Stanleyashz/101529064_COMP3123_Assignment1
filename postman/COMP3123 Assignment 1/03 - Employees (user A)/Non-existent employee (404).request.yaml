@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/emp/employees/507f1f77bcf86cd799439011"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 404', () => pm.response.to.have.status(404));
+      pm.test('Not found code', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));
+    language: text/javascript
+order: 13000

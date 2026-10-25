@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/health"
+method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Returns 200', () => pm.response.to.have.status(200));
+      const body = pm.response.json();
+      pm.test('Status is ok', () => pm.expect(body.status).to.eql('ok'));
+      pm.test('Database is connected', () => pm.expect(body.database).to.eql('connected'));
+      pm.test('Uptime is reported', () => pm.expect(body.uptime_seconds).to.be.a('number'));
+    language: text/javascript
+order: 1000
